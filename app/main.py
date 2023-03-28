@@ -1,5 +1,4 @@
 import fastapi
-import yaml
 import uvicorn
 from os import path
 
