@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 
-nazwy_sal = {0: "Sala 1", 1: "Sala 2", 2: "Sala 3"}
-sale = {0: False, 1: True, 2: False}
+nazwy_sal: dict[int: str] = {0: "Sala 1", 1: "Sala 2", 2: "Sala 3"}
+sale: dict[int: bool] = {0: False, 1: True, 2: False}
 
 @app.get("/sala/{id}")
 def sala(id: int):
