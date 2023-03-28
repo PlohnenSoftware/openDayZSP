@@ -33,3 +33,9 @@ html {
   caption {
     padding: 10px;
   }
+  .zajete{
+    background-color:rgba(255, 99, 71, 0.5);
+  }
+  .wolek{
+    background-color:rgba(50, 205, 50, 0.5);
+  }
