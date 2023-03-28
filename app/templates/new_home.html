@@ -1,0 +1,141 @@
+{% extends "index.html" %} {% block content %}
+<div class="jsdom" id="datalists_contaier">
+    <ul id="datalist">
+        <li class="platformLine" id="steamLine">
+            {% if zwrot['steam']['error'] == 'OK' %}
+            <a class="profileLink" href="{{zwrot['steam']['url']}}"> {{zwrot['steam']['personaname']}} </a>
+            <a class="profileAvatar avatarBorder {{zwrot['steam']['status']}}" href="{{zwrot['steam']['avatar']}}" style="background-image: url({{zwrot['steam']['avatar']}});"></a>
+            <div class="playerStatus{{zwrot['steam']['status']}}">Status: {{zwrot['steam']['status'].capitalize()}}</div>
+            <ul class="gamesList" style="text-align: left;">
+                {% for i in zwrot['steam']['favgames'] %}
+                <li class="gameLine" id="game{{i}}">
+                    <img src="{{zwrot['steam']['favgames'][i]['icon_link']}}" />
+                    <span> {{i}}. {{zwrot['steam']['favgames'][i]['name']}}</span>
+                    <span class="timeIndicator" id="time1">Hours played: {{zwrot['steam']['favgames'][i]['playtime_forever']//60}} </span>
+                </li>
+                {% endfor %}
+            </ul>
+            <span class="levelIndicator">level: {{zwrot['steam']['level']}} </span>
+            {% if zwrot['steam']['number_of_friends'] != 0 %}
+            <div class="dropdown scroll">
+                <button class="dropbtn">Friends</button>
+                <div class="dropdown-content">
+                {% for friend in zwrot['steam']['friends'] %}
+                    <div class="dropdown-line">
+                    <img src="{{friend['avatar']}}"></img>
+                    <a href="{{friend['profileurl']}}">{{friend['personaname']}}</a>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <div>Players friends were not found</div>
+            {% endif %}
+            {% endif %} {% if zwrot['steam']['error'] == 'NOT_FOUND' %}
+            <div>Player was not found on Steam</div>
+            {% endif %} {% if zwrot['steam']['error'] == 'API_ERROR' %}
+            <div>Steam API error</div>
+            {% endif %}
+            <img class="platformLogo" id="steamLogo" src="../static/platforms/Steam_icon.svg" />
+        </li>
+        <li class="platformLine" id="minecraftLine">
+        {% if zwrot['minecraft']['error'] == 'OK' %}
+            <div href="{{zwrot['minecraft']['link']}}">{{zwrot['minecraft']['name']}}</div>
+            <a class="profileAvatar avatarBorder {{zwrot['minecraft']['status']}}" href="{{zwrot['minecraft']['avatar']}}" style="background-image: url({{zwrot['minecraft']['avatar']}});"></a>
+            <div class="playerStatus{{zwrot['minecraft']['status']}}">Status: {{zwrot['minecraft']['status'].capitalize()}}</div>
+            {% if zwrot['minecraft']['last_seen'] != False %}
+            <div>Last seen on hypixel: {{zwrot['minecraft']['last_seen']}}</div>
+            {% else %}
+            <div>Never never recorded or never seen on hypixel</div>
+            {% endif %}
+            <div class="aliasLine">
+                {% if zwrot['minecraft']['aliases'] != 0%}
+                    <div id ="minecraftAliases">Minecraft aliases:</div>
+                    {% for i in zwrot['minecraft']['aliases'] %}
+                        <a href="./{{i}}">{{i}}</a>
+                    {% endfor %}
+                {% else %}
+                    <div>No aliases found</div>
+                {% endif %}
+            </div>
+            {% if zwrot['minecraft']['number_of_friends'] != 0 %}
+                <div class="dropdown scroll">
+                    <button class="dropbtn">Friends</button>
+                    <div class="dropdown-content">
+                    {% for friend in zwrot['minecraft']['friends'] %}
+                    <div class="dropdown-line">
+                        <img src="{{friend['avatar']}}"></img>
+                        <a href="./{{friend['name']}}">{{friend['name']}}</a>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %} {% if zwrot['minecraft']['error'] == 'NOT_FOUND' %}
+        <div>Player was not found on minecraft</div>
+        {% endif %} {% if zwrot['minecraft']['error'] == 'API_ERROR' %}
+        <div>Minecraft API error</div>
+        {% endif %}
+        <img class="platformLogo" id="minecraftLogo" src="../static/platforms/minecraft_icon.svg" />
+        </li>
+        <li class="platformLine" id="lolLine">
+            {% if zwrot['lol']['error'] == 'OK' %}
+            <a href="{{zwrot['lol']['link']}}">{{zwrot['lol']['name']}}</a>
+                <a class="profileAvatar" href="{{zwrot['lol']['avatar']}}" style="background-image: url({{zwrot['lol']['avatar']}});"></a>
+                    {% if zwrot['lol']['tier'] != 'inactive' %}
+                    
+                        <span class="rank">
+                            <div class="rankName">
+                                <span>Rank: </span>
+                                <br/>
+                                <span class="rankTier">{{zwrot['lol']['tier']}}</span>
+                                <span class="rankRank">{{zwrot['lol']['rank']}}</span>
+                                <span class="rankLP"> {{zwrot['lol']['leaguePoints']}} LP</span>
+                            </div>
+                            <img src="/static/lolranks/{{zwrot['lol']['tier']}}.png", class="tierImg"/>
+                        </span>
+                    {% else %}
+                    <div>This player has no soloq rank this season</div>
+                    {% endif %}
+                <span class="levelIndicator">Level: {{zwrot['lol']['level']}} </span>
+            <div>Last updated: {{zwrot['lol']['revisionDate']}}</div>
+            {% endif %} {% if zwrot['lol']['error'] == 'NOT_FOUND' %}
+            <div>Player was not found</div>
+            {% endif %} {% if zwrot['lol']['error'] == 'API_ERROR' %}
+            <div>League of Legends API error</div>
+            {% endif %} {% if zwrot['lol']['error'] == 'KEY_ERROR' %}
+            <div>League of Legends API key has expired</div>
+            {% endif %}
+            <img class="platformLogo" id="lolLogo" src="../static/platforms/LoL_icon.svg" />
+        </li>
+        <li class="platformLine" id="fortniteLine">
+            {% if zwrot['fortnite']['error'] == 'OK' %}
+            <div>Name: {{zwrot['fortnite']['name']}}</div>
+            <div>Hours played: {{zwrot['fortnite']['hoursPlayed']}}</div>
+            <div>Wins: {{zwrot['fortnite']['wins']}}</div>
+            <div>Last seen on fortnite: {{zwrot['fortnite']['lastPlayed']}}</div>
+            <span class="levelIndicator">Battlepass Level: {{zwrot['fortnite']['battlepassLevel']}} </span>
+            <progress id="fortniteBar" value="{{zwrot['fortnite']['battlepassLevel']}}" max="100"> {{zwrot['fortnite']['battlepassLevel']}} </progress>
+            {% endif %} {% if zwrot['fortnite']['error'] == 'NOT_FOUND' %}
+            <div>Player was not found</div>
+            {% endif %} {% if zwrot['fortnite']['error'] == 'PRIVATE' %}
+            <div>The account is private in fortnite</div>
+            {% endif %} {% if zwrot['fortnite']['error'] == 'KEY_ERROR' %}
+            <div>Fortnite API key has expired</div>
+            {% endif %}
+            <img class="platformLogo" id="fortniteLogo" src="../static/platforms/fortnite_icon.svg" />
+        </li>
+        <li class="platformLine" id="snapLine">
+            {% if zwrot['snap']['error'] == 'OK' %}
+            <div>{{zwrot['snap']['profile_card']}}</div>
+            <img src="{{zwrot['snap']['bitmoji_link']}}" class="profileAvatar"></img>
+            {% endif %} {% if zwrot['snap']['error'] == 'NOT_FOUND' %}
+            <div>User was not found</div>
+            {% endif %} {% if zwrot['snap']['error'] == 'UNKNOWN_ERROR' %}
+            <div>Unknown snap error</div>
+            {% endif %}
+            <img class="platformLogo" id="snapLogo" src="../static/platforms/Snap_icon.svg" />
+        </li>
+    </ul>
+</div>
+{% endblock %}
