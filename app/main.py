@@ -2,13 +2,23 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
 import asyncio
 import aiohttp
 import uvicorn
 
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="./app/static"), name="static")
 templates = Jinja2Templates(directory="./app/templates")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["POST", "GET"],
+    allow_headers=["*"],
+)
 
 parter_technikum = [0, 1, 2, 3, 4, 5]
 pietro_technikum = [6, 7, 8, 9, 10, 11]
@@ -31,15 +41,16 @@ def index(request: Request) -> HTMLResponse:
     return templates.TemplateResponse("index.html", {'request': request, "parter_technikum": parter_technikum, "pietro_technikum": pietro_technikum, "parter_liceum": parter_liceum, "pietro_liceum": pietro_liceum, "pozostale": pozostale, "nazwy_sal": nazwy_sal, "sala": sala, "sala_zajeta": sala_zajeta})
 
 
-# @app.get("/sala/{id}", response_class=HTMLResponse)
-# def sala(id: int):
-#     sale[id] = not sale[id]
-#     return {"nazwa": nazwy_sal[id], "status": sale[id]}
+@app.post("/sala/change/{idc}", response_class=HTMLResponse)
+def zmien(idc):
+    idc = int(idc)
+    sala_zajeta[idc] = not sala_zajeta[idc]
+    return "done"
 
 
-@app.get("/sala/{id}", response_class=HTMLResponse)
-def search(id, request: Request) -> HTMLResponse:
-    classroom_id = sala[id]
+@app.get("/sala/{idc}", response_class=HTMLResponse)
+def search(idc, request: Request) -> HTMLResponse:
+    classroom_id = sala[idc]
     classroom_name = nazwy_sal[classroom_id]
     classroom_status = sala_zajeta[classroom_id]
     if classroom_id in parter_technikum or classroom_id in pietro_technikum:
@@ -60,7 +71,14 @@ def search(id, request: Request) -> HTMLResponse:
     else:
         floor = "Błąd"
 
-    return templates.TemplateResponse("manage.html", {'request': request, 'classroom_name': classroom_name, 'classroom_status': classroom_status, 'classroom_id': classroom_id, 'header': header, 'floor': floor})
+    if sala_zajeta[classroom_id]:
+        style = "zajete"
+        text = "Zwolnij"
+    else:
+        style = "wolne"
+        text= "Zajmij"
+
+    return templates.TemplateResponse("manage.html", {'request': request, 'classroom_name': classroom_name, 'classroom_status': classroom_status, 'classroom_id': classroom_id, 'header': header, 'floor': floor,'style':style,'text':text})
 
 
 if __name__ == "__main__":

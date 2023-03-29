@@ -5,14 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/code/style.css" rel="stylesheet" type="text/css">
+    <script src="../static/code/scripts.js"></script>
     <title>Zarządzaj: {{ classroom_name }}</title>
 </head>
 
 <body>
     <h1>{{ classroom_name }}</h1>
-    <h2>{{header}}</h2>
-    <h3>{{floor}}</h3>
+    <h2>{{ header }}</h2>
+    <h3>{{ floor }}</h3>
+    <input class="przyciskacz {{ style }}"
+       type="button"
+       id="klikklik"
+       value={{text}}
+       classroomid = {{classroom_id}}>
+
 
 </body>
-
+<script>klikklik.addEventListener('click', () => {change();}) </script>
 </html>
