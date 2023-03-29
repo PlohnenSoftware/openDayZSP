@@ -1,7 +1,7 @@
-async function change() {
-    const button = document.getElementById("klikklik");
+async function change(e) {
+
     const http = new XMLHttpRequest();
-    let url = `../sala/change/${button.getAttribute("classroomid")}/`;
+    let url = `../sala/change/${e.target.getAttribute("classroomid")}/`;
     http.open("POST", url);
     http.send();
     http.onreadystatechange = (d) => {

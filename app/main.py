@@ -50,6 +50,8 @@ def zmien(idc):
 
 @app.get("/sala/{idc}", response_class=HTMLResponse)
 def search(idc, request: Request) -> HTMLResponse:
+    if idc not in sala:
+        return "Błąd - Podaj poprawny numer sali lub skontaktuj się z Rzepeckim"
     classroom_id = sala[idc]
     classroom_name = nazwy_sal[classroom_id]
     classroom_status = sala_zajeta[classroom_id]
