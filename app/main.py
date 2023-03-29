@@ -83,5 +83,10 @@ def search(idc, request: Request) -> HTMLResponse:
     return templates.TemplateResponse("manage.html", {'request': request, 'classroom_name': classroom_name, 'classroom_status': classroom_status, 'classroom_id': classroom_id, 'header': header, 'floor': floor,'style':style,'text':text})
 
 
+@app.get("/rzepus_rzepec", response_class=HTMLResponse)
+def rzepa_rzepecki(request: Request) -> HTMLResponse:
+    ile = len(sala_zajeta)
+    return templates.TemplateResponse("admin.html", {'request': request,"sala_zajeta":sala_zajeta,"nazwy_sal":nazwy_sal,"ile":ile})
+
 if __name__ == "__main__":
     uvicorn.run(app, port=80)

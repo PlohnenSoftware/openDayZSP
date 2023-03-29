@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +9,38 @@
     <script src="../static/code/scripts.js"></script>
     <title>Admin's panel</title>
 </head>
+
 <body>
-    
+<table>
+    <tr>
+      <th>Sala</th>
+      <th>Status</th>
+      <th>Zarządzaj</th>
+    </tr>
+    {% for classroom in range(0,ile)%}
+    <tr>
+      <td>{{ nazwy_sal[classroom] }}</td>
+      <td>{% if sala_zajeta[classroom] %}
+        <div class="zajete tabela_content">Zajęte</div>
+        {%else%}
+        <div class="wolne tabela_content">Wolne</div>
+        {%endif%}
+      </td>
+      <td><input class="przyciskacz"
+       type="button"
+       id="klikklik"
+       value="Zmień status"
+       classroomid = {{classroom}}>
+</td>
+    </tr>
+    {% endfor %}
+  </table>
 </body>
+
+<script>
+    let elementsArray = document.querySelectorAll(".przyciskacz");
+    elementsArray.forEach(function (elem) {
+        elem.addEventListener('click', () => {change(event);})
+    });</script>
+
 </html>
