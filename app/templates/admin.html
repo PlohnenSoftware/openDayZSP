@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../static/code/style.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/svg" href="../static/favicon.svg">
     <script src="../static/code/scripts.js"></script>
     <title>Admin's panel</title>
 </head>
@@ -17,7 +18,7 @@
       <th>Status</th>
       <th>Zarządzaj</th>
     </tr>
-    {% for classroom in range(0,ile)%}
+    {% for classroom in ile %}
     <tr>
       <td>{{ nazwy_sal[classroom] }}</td>
       <td>{% if sala_zajeta[classroom] %}

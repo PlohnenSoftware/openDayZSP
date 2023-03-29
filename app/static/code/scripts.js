@@ -11,4 +11,9 @@ async function change(e) {
         window.location.reload();
     }, 1500);
 };
-
+{
+    window.setTimeout(() => {
+        console.log("reload");
+        window.location.reload();
+    }, 15000);
+}
