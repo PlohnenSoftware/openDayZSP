@@ -32,8 +32,8 @@ sala: dict[str:int] = {'l007': 0, 'l009': 1, 'l010': 2, 'l013': 4, 'l014': 5, 'l
 sala_zajeta: dict[int: bool] = {0: False, 1: False, 2: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False,
                                 12: False, 13: False, 14: False, 15: False, 16: False, 17: False, 18: False, 19: False, 20: False, 21: False, 22: False, 23: False, 24: False, 25: False, 26:False, 27:False, 28:False}
 
-asyncio.set_event_loop_policy(
-    asyncio.WindowsSelectorEventLoopPolicy())  # delete on linux0
+# asyncio.set_event_loop_policy(
+#     asyncio.WindowsSelectorEventLoopPolicy())  # delete on linux0
 
 
 @app.get("/", response_class=HTMLResponse)
