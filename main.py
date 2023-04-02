@@ -3,8 +3,6 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
-import asyncio
-import aiohttp
 import uvicorn
 
 
@@ -31,10 +29,6 @@ sala: dict[str:int] = {'l007': 0, 'l009': 1, 'l010': 2, 'l013': 4, 'l014': 5, 'l
                        'g009': 13, 'g010': 14, 'g013': 15, 'g014': 16, 'g106a': 17, 'g106b': 18, 'g109': 19, 'g110': 20, 'g113': 21, 'g114': 22, 's122': 23, 's123': 24, 'hala': 25, 'biblioteka': 26, 'szachy': 27, 'internat': 28}
 sala_zajeta: dict[int: bool] = {0: False, 1: False, 2: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False,
                                 12: False, 13: False, 14: False, 15: False, 16: False, 17: False, 18: False, 19: False, 20: False, 21: False, 22: False, 23: False, 24: False, 25: False, 26: False, 27: False, 28: False}
-
-# asyncio.set_event_loop_policy(
-#     asyncio.WindowsSelectorEventLoopPolicy())  # delete on linux0
-
 
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request) -> HTMLResponse:
