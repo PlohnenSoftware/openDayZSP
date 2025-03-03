@@ -1,5 +1,7 @@
 // Nawiązujemy połączenie WebSocket z serwerem
-const ws = new WebSocket(`ws://${location.host}/openday/ws`);
+const protocol = location.protocol === "https:" ? "wss://" : "ws://";
+const ws = new WebSocket(`${protocol}${location.host}/openday/ws`);
+
 
 ws.onmessage = function(event) {
     let data = JSON.parse(event.data);
