@@ -1,1 +1,1 @@
-# openDayZSP
+# Simple Services

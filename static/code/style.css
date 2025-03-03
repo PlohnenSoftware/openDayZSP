@@ -58,6 +58,7 @@ caption {
   font-family: Verdana;
   font-size: 15px;
   background-color: rgba(75, 0, 130, 1);
+  width: 90px;
 }
 
 .tabela_content {

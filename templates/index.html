@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>DNI OTWARTE ROZPISKA KLAS</title>
-  <link href="../static/code/style.css" rel="stylesheet" type="text/css">
-  <link rel="icon" type="image/svg" href="../static/favicon.svg">
-  <script src="../static/code/scripts.js"></script>
+  <link href="/static/code/style.css" rel="stylesheet" type="text/css">
+  <link rel="icon" type="image/svg" href="/static/favicon.svg">
+  <script src="/static/code/scripts.js"></script>
 </head>
-
 <body>
   <h1>Dni otwarte 2023</h1>
   <h2>Technikum (klasy na literkę L)</h2>
@@ -22,11 +20,12 @@
     {% for classroom in parter_technikum %}
     <tr>
       <td>{{ nazwy_sal[classroom] }}</td>
-      <td>{% if sala_zajeta[classroom] %}
-        <div class="zajete tabela_content">Zajęte</div>
-        {%else%}
-        <div class="wolne tabela_content">Wolne</div>
-        {%endif%}
+      <td>
+        {% if sala_zajeta[classroom] %}
+           <div id="status-{{ classroom }}" class="zajete tabela_content">Zajęte</div>
+        {% else %}
+           <div id="status-{{ classroom }}" class="wolne tabela_content">Wolne</div>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}
@@ -40,11 +39,12 @@
     {% for classroom in pietro_technikum %}
     <tr>
       <td>{{ nazwy_sal[classroom] }}</td>
-      <td>{% if sala_zajeta[classroom] %}
-        <div class="zajete tabela_content">Zajęte</div>
-        {%else%}
-        <div class="wolne tabela_content">Wolne</div>
-        {%endif%}
+      <td>
+        {% if sala_zajeta[classroom] %}
+           <div id="status-{{ classroom }}" class="zajete tabela_content">Zajęte</div>
+        {% else %}
+           <div id="status-{{ classroom }}" class="wolne tabela_content">Wolne</div>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}
@@ -59,11 +59,12 @@
     {% for classroom in parter_liceum %}
     <tr>
       <td>{{ nazwy_sal[classroom] }}</td>
-      <td>{% if sala_zajeta[classroom] %}
-        <div class="zajete tabela_content">Zajęte</div>
-        {%else%}
-        <div class="wolne tabela_content">Wolne</div>
-        {%endif%}
+      <td>
+        {% if sala_zajeta[classroom] %}
+           <div id="status-{{ classroom }}" class="zajete tabela_content">Zajęte</div>
+        {% else %}
+           <div id="status-{{ classroom }}" class="wolne tabela_content">Wolne</div>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}
@@ -77,11 +78,12 @@
     {% for classroom in pietro_liceum %}
     <tr>
       <td>{{ nazwy_sal[classroom] }}</td>
-      <td>{% if sala_zajeta[classroom] %}
-        <div class="zajete tabela_content">Zajęte</div>
-        {%else%}
-        <div class="wolne tabela_content">Wolne</div>
-        {%endif%}
+      <td>
+        {% if sala_zajeta[classroom] %}
+           <div id="status-{{ classroom }}" class="zajete tabela_content">Zajęte</div>
+        {% else %}
+           <div id="status-{{ classroom }}" class="wolne tabela_content">Wolne</div>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}
@@ -95,13 +97,15 @@
     {% for classroom in pozostale %}
     <tr>
       <td>{{ nazwy_sal[classroom] }}</td>
-      <td>{% if sala_zajeta[classroom] %}
-        <div class="zajete tabela_content">Zajęte</div>
-        {%else%}
-        <div class="wolne tabela_content">Wolne</div>
-        {%endif%}
+      <td>
+        {% if sala_zajeta[classroom] %}
+           <div id="status-{{ classroom }}" class="zajete tabela_content">Zajęte</div>
+        {% else %}
+           <div id="status-{{ classroom }}" class="wolne tabela_content">Wolne</div>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}
   </table>
 </body>
+</html>

@@ -1,47 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../static/code/style.css" rel="stylesheet" type="text/css">
-    <link rel="icon" type="image/svg" href="../static/favicon.svg">
-    <script src="../static/code/scripts.js"></script>
+    <link href="/static/code/style.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/svg" href="/static/favicon.svg">
+    <script src="/static/code/scripts.js"></script>
     <title>Admin's panel</title>
 </head>
-
 <body>
-<table>
-    <tr>
-      <th>Sala</th>
-      <th>Status</th>
-      <th>Zarządzaj</th>
-    </tr>
-    {% for classroom in ile %}
-    <tr>
-      <td>{{ nazwy_sal[classroom] }}</td>
-      <td>{% if sala_zajeta[classroom] %}
-        <div class="zajete tabela_content">Zajęte</div>
-        {%else%}
-        <div class="wolne tabela_content">Wolne</div>
-        {%endif%}
-      </td>
-      <td><input class="przyciskacz"
-       type="button"
-       id="klikklik"
-       value="Zmień status"
-       classroomid = {{classroom}}>
-</td>
-    </tr>
-    {% endfor %}
-  </table>
+    <table>
+        <tr>
+            <th>Sala</th>
+            <th>Status</th>
+            <th>Zarządzaj</th>
+        </tr>
+        {% for classroom in ile %}
+        <tr>
+            <td>{{ nazwy_sal[classroom] }}</td>
+            <td>
+                {% if sala_zajeta[classroom] %}
+                    <div id="status-{{ classroom }}" class="zajete tabela_content">Zajęte</div>
+                {% else %}
+                    <div id="status-{{ classroom }}" class="wolne tabela_content">Wolne</div>
+                {% endif %}
+            </td>
+            <td>
+                {% if sala_zajeta[classroom] %}
+                    <input class="przyciskacz" type="button" id="button-{{ classroom }}" value="Zwolnij" classroomid="{{ classroom }}">
+                {% else %}
+                    <input class="przyciskacz" type="button" id="button-{{ classroom }}" value="Zajmij" classroomid="{{ classroom }}">
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
-
-<script>
-    let elementsArray = document.querySelectorAll(".przyciskacz");
-    elementsArray.forEach(function (elem) {
-        elem.addEventListener('click', () => {change(event);})
-    });</script>
-
 </html>
