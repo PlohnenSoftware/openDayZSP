@@ -34,7 +34,7 @@ ws.onmessage = function(event) {
 function change(e) {
     const classroom_id = e.target.getAttribute("classroomid");
     const http = new XMLHttpRequest();
-    const url = `/openday/sala/change/${classroom_id}/`;
+    const url = `${location.host}/openday/sala/change/${classroom_id}/`;
     http.open("POST", url);
     http.send();
     http.onreadystatechange = () => {
